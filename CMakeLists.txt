@@ -1,7 +1,14 @@
-cmake_minimum_required(VERSION 3.9)
-project(NLOPT)
+cmake_minimum_required(VERSION 2.8.12)
 
-set(CMAKE_CXX_STANDARD 11)
+project(operationalSpaceControl)
 
-add_executable(NLOPT main.cpp)
-target_link_libraries(NLOPT nlopt)
+find_package(DART 6.2.0 REQUIRED COMPONENTS utils-urdf gui CONFIG)
+
+add_compile_options(-std=c++11)
+
+include_directories(${DART_INCLUDE_DIRS})
+
+file(GLOB srcs "*.cpp" "*.hpp")
+add_executable(${PROJECT_NAME} ${srcs})
+
+target_link_libraries(${PROJECT_NAME} ${DART_LIBRARIES} nlopt)
